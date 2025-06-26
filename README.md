@@ -1,146 +1,141 @@
-# Algoritmo de Kruskal
+# Simulador de Linguagens Formais e Autômatos
 
-Uma implementação em Java do algoritmo de Kruskal para encontrar a Árvore Geradora Mínima (AGM) de um grafo ponderado.
+Um simulador educativo desenvolvido em JavaFX para demonstrar e validar conceitos fundamentais da teoria de linguagens formais e autômatos, incluindo **Expressões Regulares** e **Gramáticas Regulares**.
 
 ## 📋 Sobre o Projeto
 
-Este projeto implementa o algoritmo de Kruskal, um algoritmo guloso usado para encontrar a árvore geradora mínima de um grafo conectado e ponderado. O algoritmo encontra um subconjunto das arestas que forma uma árvore incluindo todos os vértices, onde o peso total das arestas é minimizado.
+Este projeto foi desenvolvido como uma ferramenta educativa para auxiliar no entendimento de Linguagens Regulares e seu potencial de representação. O simulador oferece uma interface gráfica intuitiva que permite aos usuários experimentar e validar diferentes tipos de linguagens formais.
 
-## 🏗️ Estrutura do Projeto
+## 🚀 Funcionalidades
 
+### 1. Simulador de Expressões Regulares
+- **Validação de Expressões**: Interface para inserção e validação de expressões regulares
+- **Teste de Cadeias**: Verificação se uma cadeia de entrada é aceita pela expressão regular definida
+- **Símbolos Especiais**: Botões auxiliares para inserção de símbolos como `|` (ou) e `ε` (epsilon/vazio)
+- **Validação em Tempo Real**: Verificação da sintaxe da expressão regular durante a digitação
+
+### 2. Simulador de Gramáticas Regulares
+- **Definição Completa de Gramática**: Interface para definir todos os componentes de uma gramática formal:
+  - **V**: Conjunto de símbolos não-terminais (variáveis)
+  - **T**: Conjunto de símbolos terminais
+  - **P**: Conjunto de regras de produção
+  - **S**: Símbolo inicial
+- **Validação de Derivações**: Verificação se uma cadeia pode ser gerada pela gramática
+- **Execução Passo a Passo**: Visualização detalhada do processo de derivação
+- **Valores de Teste**: Botão para carregar exemplos pré-definidos
+
+## 🏗️ Arquitetura do Projeto
+
+### Estrutura de Diretórios
 ```
-AlgoritmoKruskal/
-├── src/
-│   ├── Main.java           # Classe principal com implementação do algoritmo
-│   ├── Aresta.java         # Classe que representa uma aresta do grafo
-│   ├── agmkruskel.txt      # Arquivo de entrada com grafo de 7 vértices
-│   └── grafo.txt           # Arquivo de entrada com grafo de 10 vértices
-```
-
-## 🔧 Funcionalidades
-
-### Classe Aresta
-A classe [`Aresta`](AlgoritmoKruskal/src/Aresta.java) representa uma conexão entre dois vértices com as seguintes propriedades:
-- **Origem**: Vértice de origem da aresta
-- **Destino**: Vértice de destino da aresta  
-- **Peso**: Peso/custo da aresta
-
-### Algoritmo de Kruskal
-A implementação principal em [`Main.java`](AlgoritmoKruskal/src/Main.java) segue os seguintes passos:
-
-1. **Leitura do Grafo**: 
-   - Lê a primeira linha para obter os vértices
-   - Constrói uma matriz de adjacência a partir do arquivo de entrada
-
-2. **Criação das Arestas**:
-   - Converte a matriz de adjacência em uma lista de arestas
-   - Ordena as arestas por peso (critério principal) e depois por ordem alfabética
-
-3. **Algoritmo de Kruskal**:
-   - Processa as arestas em ordem crescente de peso
-   - Utiliza uma técnica de union-find simplificada através de strings
-   - Evita a formação de ciclos verificando se os vértices já estão conectados
-   - Para quando todos os vértices estão conectados em uma única componente
-
-4. **Resultados**:
-   - Exibe a matriz de adjacência original
-   - Lista todas as arestas ordenadas por peso
-   - Mostra o processo de formação das componentes conexas
-   - Apresenta as arestas selecionadas para a AGM
-   - Calcula o custo total da árvore geradora mínima
-
-## 📊 Formato dos Arquivos de Entrada
-
-Os arquivos de entrada seguem o formato:
-```
-A B C D E F G
-0 1 0 4 0 0 0
-1 0 2 6 4 0 0
-0 2 0 0 5 6 0
-4 6 0 0 3 0 4
-0 4 5 3 0 8 7
-0 0 6 0 8 0 3
-0 0 0 4 7 3 0
+proj-simulador-lfa-javafx/
+├── src/main/
+│   ├── java/
+│   │   ├── module-info.java
+│   │   └── unoeste/fipp/gabryelborges/projsimuladorlfajavafx/
+│   │       ├── HelloApplication.java        # Classe principal
+│   │       ├── HelloController.java         # Controlador da tela inicial
+│   │       ├── ExpRegViewController.java    # Controlador de expressões regulares
+│   │       ├── GramRegViewController.java   # Controlador de gramáticas regulares
+│   │       └── entidades/
+│   │           ├── Gramatica.java          # Modelo da gramática
+│   │           └── Util.java               # Utilitários para exibição de mensagens
+│   └── resources/
+│       └── unoeste/fipp/gabryelborges/projsimuladorlfajavafx/
+│           ├── hello-view.fxml             # Interface da tela inicial
+│           ├── exp-reg-view.fxml           # Interface de expressões regulares
+│           └── gram-reg-view.fxml          # Interface de gramáticas regulares
 ```
 
-- **Primeira linha**: Vértices do grafo separados por espaço
-- **Linhas seguintes**: Matriz de adjacência onde 0 indica ausência de aresta
+### Componentes Principais
 
-## 🚀 Como Executar
+#### 🎯 Classe Principal (`HelloApplication`)
+Responsável por inicializar a aplicação JavaFX e carregar a interface principal.
 
-1. Compile o projeto:
-   ```bash
-   javac AlgoritmoKruskal/src/*.java
-   ```
+#### 🏠 Controlador Principal (`HelloController`)
+Gerencia a navegação entre as diferentes funcionalidades do simulador:
+- Abertura da tela de Expressões Regulares
+- Abertura da tela de Gramáticas Regulares
+- Preparação para funcionalidade de Autômatos (em desenvolvimento)
 
-2. Execute o programa:
-   ```bash
-   java -cp AlgoritmoKruskal/src Main
-   ```
+#### 📝 Simulador de Expressões Regulares (`ExpRegViewController`)
+**Características Técnicas:**
+- **Validação de Sintaxe**: Utiliza regex pattern `^[0-9a-zA-Z*+|().ε{},]+$` para validar caracteres permitidos
+- **Compilação de Regex**: Usa `Pattern.compile()` e `Matcher.matches()` do Java para testar cadeias
+- **Tratamento de Símbolos Especiais**: Conversão automática de `ε` (epsilon) para string vazia
+- **Interface Responsiva**: Validação em tempo real com feedback visual
 
-3. O programa utilizará o arquivo [`agmkruskel.txt`](AlgoritmoKruskal/src/agmkruskel.txt) por padrão
+#### 📚 Simulador de Gramáticas Regulares (`GramRegViewController`)
+**Algoritmo de Validação:**
+1. **Parsing dos Componentes**: Separação dos elementos V, T, P, S por vírgulas
+2. **Verificação Inicial**: Validação se o símbolo inicial pertence ao conjunto de não-terminais
+3. **Processo de Derivação**: 
+   - Iteração através de cada símbolo da cadeia de entrada
+   - Busca por regras de produção aplicáveis
+   - Verificação de continuidade da derivação
+4. **Validação Final**: Confirmação de que todas as variáveis foram consumidas
 
-## 📈 Exemplo de Saída
+**Funcionalidades Avançadas:**
+- **Modo Passo a Passo**: Armazena cada regra aplicada para visualização posterior
+- **Validação Rigorosa**: Verificação de completude da derivação
+- **Interface Adaptativa**: Desabilitação de botões baseada no estado dos campos
 
-O programa exibe:
-- Matriz de adjacência do grafo original
-- Lista de todas as arestas ordenadas por peso
-- Processo iterativo de formação das componentes conexas
-- Arestas selecionadas para formar a AGM
-- Custo total da árvore geradora mínima
+#### 🔧 Modelo de Dados (`Gramatica`)
+Implementa a estrutura formal de uma gramática livre de contexto:
+- **Encapsulamento**: Getters e setters para todos os componentes
+- **Método `podeGerar()`**: Verifica se uma variável pode gerar um símbolo específico
+- **Validação de Produções**: Análise da estrutura das regras de produção
 
-# Exemplo:
+## 🛠️ Tecnologias Utilizadas
+
+- **Java 21**: Linguagem de programação principal
+- **JavaFX 21**: Framework para interface gráfica
+- **Maven**: Gerenciamento de dependências e build
+- **FXML**: Definição declarativa das interfaces
+- **Regex API**: Processamento de expressões regulares
+
+## ⚙️ Como Executar
+
+### Pré-requisitos
+- Java 21 ou superior
+- Maven 3.8+
+
+### Execução
+```bash
+# Clone o repositório
+git clone <url-do-repositorio>
+
+# Navegue até o diretório do projeto
+cd proj-simulador-lfa-javafx
+
+# Execute com Maven
+mvn clean javafx:run
 ```
-Matriz de adjacência: 
-0 1 0 4 0 0 0 
-1 0 2 6 4 0 0 
-0 2 0 0 5 6 0 
-4 6 0 0 3 0 4 
-0 4 5 3 0 8 7 
-0 0 6 0 8 0 3 
-0 0 0 4 7 3 0 
 
-Lista de Arestas: 
-A B 1
-B C 2
-D E 3
-F G 3
-A D 4
-B E 4
-D G 4
-C E 5
-B D 6
-C F 6
-E G 7
-E F 8
-
-Componentes:
-B B C D E F G 
-C C C D E F G 
-C C C E E F G 
-C C C E E G G 
-E E E E E G G 
-G G G G G G G 
-
-T - Arestas selecionadas: 
-A B 1
-B C 2
-D E 3
-F G 3
-A D 4
-D G 4
-
-Custo total: 17
-Linha: G G G G G G G
+### Build
+```bash
+# Gerar o executável
+mvn clean compile
 ```
-## 🔍 Algoritmo Implementado
 
-A implementação utiliza uma abordagem simplificada do union-find através de manipulação de strings, onde:
-- Cada vértice inicialmente forma sua própria componente
-- Ao conectar dois vértices, suas componentes são unificadas
-- O algoritmo para quando resta apenas uma componente (todos os vértices conectados)
+## 🎯 Exemplos de Uso
 
-Esta implementação é educacional e demonstra os conceitos fundamentais do algoritmo de Kruskal de forma clara e
+### Expressões Regulares
+- **Expressão**: `a*b+`
+- **Entrada Válida**: `aaabbb`
+- **Entrada Inválida**: `bbaaa`
 
+### Gramáticas Regulares
+- **V**: `A,B,C`
+- **T**: `a,b,c`
+- **P**: `A->aB,A->aC,B->bC,B->b,B->bA,C->cA,C->c`
+- **S**: `A`
+- **Derivação**: `abc`
 
+## 🔍 Características Técnicas
 
+- **Arquitetura MVC**: Separação clara entre modelo, visão e controle
+- **Programação Orientada a Eventos**: Resposta a ações do usuário em tempo real
+- **Validação Robusta**: Múltiplas camadas de verificação de entrada
+- **Interface Responsiva**: Feedback imediato para o usuário
+- **Modularidade**: Componentes independentes e reutilizáveis
